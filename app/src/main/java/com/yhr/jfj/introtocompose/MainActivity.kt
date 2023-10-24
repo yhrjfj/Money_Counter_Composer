@@ -70,6 +70,7 @@ fun MyApp() {
                 )
             )
             Spacer(modifier = Modifier.height(130.dp))
+            // Circle Function
             CreateCircle(moneyCounter = moneyCounter){ newValue ->
                 moneyCounter = newValue
             }
