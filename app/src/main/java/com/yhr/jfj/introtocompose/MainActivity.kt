@@ -3,6 +3,7 @@ package com.yhr.jfj.introtocompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -22,7 +23,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+//                    Greeting("Android")
+                    ShowAge(age = 23)
                 }
             }
         }
@@ -37,10 +39,20 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
+// Showing age
+@Preview(showBackground = true)
+@Composable
+fun ShowAge(age: Int){
+    Text(text = "Your age is: ${age.toInt()}")
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     IntroToComposeTheme {
+        Column {
         Greeting("Android")
+            ShowAge(age = 22)
+        }
     }
 }
