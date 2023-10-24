@@ -13,6 +13,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -70,11 +74,17 @@ fun MyApp() {
 @Preview
 @Composable
 fun CreateCircle() {
+    var moneyCounter by remember {
+        mutableStateOf(0)
+    }
     Card(
         modifier = Modifier
             .padding(3.dp)
             .size(105.dp)
-            .clickable { Log.d("Tap", "CreateCircle: Clicked") },
+            .clickable {
+                moneyCounter += 1
+                Log.d("Counter", "CreateCircle: $moneyCounter")
+            },
         shape = CircleShape,
         elevation = CardDefaults.cardElevation(5.dp)
     ) {
@@ -82,7 +92,7 @@ fun CreateCircle() {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Text("Tap")
+            Text("Tap $moneyCounter")
         }
     }
 }
