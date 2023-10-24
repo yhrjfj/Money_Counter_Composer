@@ -1,11 +1,14 @@
 package com.yhr.jfj.introtocompose
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -51,11 +54,17 @@ fun MyApp() {
 @Composable
 fun CreateCircle() {
     Card(
-        modifier = Modifier.padding(3.dp).size(45.dp),
-        shape = CircleShape
+        modifier = Modifier
+            .padding(3.dp)
+            .size(105.dp)
+            .clickable { Log.d("Tap", "CreateCircle: Clicked") },
+        shape = CircleShape,
+        elevation = CardDefaults.cardElevation(5.dp)
     ) {
-        Box(modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
             Text("Tap")
         }
     }
