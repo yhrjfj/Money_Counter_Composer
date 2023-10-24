@@ -1,7 +1,9 @@
 package com.yhr.jfj.introtocompose
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -47,6 +49,9 @@ class MainActivity : ComponentActivity() {
 // Main Function
 @Composable
 fun MyApp() {
+    var moneyCounter by remember {
+        mutableStateOf(0)
+    }
     // A surface container using the 'background' color from the theme
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -57,7 +62,7 @@ fun MyApp() {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "$100",
+                text = "$$moneyCounter",
                 style = TextStyle(
                     color = Color.White,
                     fontSize = 40.sp,
@@ -65,7 +70,9 @@ fun MyApp() {
                 )
             )
             Spacer(modifier = Modifier.height(130.dp))
-            CreateCircle()
+            CreateCircle(moneyCounter = moneyCounter){ newValue ->
+                moneyCounter = newValue
+            }
         }
     }
 }
@@ -73,17 +80,13 @@ fun MyApp() {
 // Circle which act as a button
 @Preview
 @Composable
-fun CreateCircle() {
-    var moneyCounter by remember {
-        mutableStateOf(0)
-    }
+fun CreateCircle(moneyCounter: Int = 0, updatedMoneyCounter: (Int) -> Unit) {
     Card(
         modifier = Modifier
             .padding(3.dp)
             .size(105.dp)
             .clickable {
-                moneyCounter += 1
-                Log.d("Counter", "CreateCircle: $moneyCounter")
+                       updatedMoneyCounter(moneyCounter + 1)
             },
         shape = CircleShape,
         elevation = CardDefaults.cardElevation(5.dp)
@@ -92,7 +95,7 @@ fun CreateCircle() {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Text("Tap $moneyCounter")
+            Text("Tap")
         }
     }
 }
